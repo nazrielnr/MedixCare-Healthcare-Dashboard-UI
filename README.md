@@ -7,7 +7,7 @@
 
 Antarmuka pengguna (UI) serbaguna untuk sistem manajemen fasilitas kesehatan, menampilkan dasbor yang berbeda untuk berbagai peran. Proyek ini sangat cocok sebagai prototipe untuk **Rumah Sakit, Klinik, Puskesmas,** dan praktik tenaga kesehatan lainnya.
 
-**Proyek ini adalah prototipe frontend dan menggunakan data dummy yang di-hardcode di dalam file `script.js` untuk simulasi fungsionalitas. Saya harap, Anda dapat mengembangkan proyek ini sebagai website stabil untuk tenaga kesehatan anda**
+**Proyek ini adalah prototipe frontend dan menggunakan data dummy yang di-hardcode di dalam file `script.js` untuk simulasi fungsionalitas. Saya berharap Anda dapat mengembangkan proyek ini lebih lanjut menjadi sebuah situs web yang stabil dan dapat digunakan oleh tenaga kesehatan Anda.**
 
 ---
 
