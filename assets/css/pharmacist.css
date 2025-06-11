@@ -1,0 +1,41 @@
+/* assets/css/pharmacist.css */
+
+/* --- CORE STYLES (from before) --- */
+.prescription-item, .low-stock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.prescription-item:hover { background-color: var(--bg-color); cursor: pointer; }
+.prescription-item:last-child, .low-stock-item:last-child { border-bottom: none; }
+.prescription-item p { font-size: 0.9rem; color: var(--text-light); }
+.low-stock-item { background-color: #fffbeb; color: #92400e; border-left: 4px solid var(--yellow-color); }
+.rx-med-item { padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 0.75rem; }
+.rx-med-item:last-child { margin-bottom: 0; }
+.rx-med-item p { font-size: 0.9rem; color: var(--text-light); }
+.rx-med-item .notes { font-style: italic; font-size: 0.85rem; }
+.modal-actions { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem; }
+
+/* --- NEW STYLES FOR SPA VIEWS --- */
+.controls-wrapper { display: flex; gap: 1rem; align-items: center; margin-left: auto; }
+.search-box { position: relative; }
+.search-box i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-light); width: 18px; height: 18px; }
+.search-box input { padding: 0.5rem 0.5rem 0.5rem 2.5rem; border: 1px solid var(--border-color); border-radius: 0.5rem; width: 100%; max-width: 250px; font-size: 0.9rem; }
+
+/* Inventory Status Badge */
+.inventory-status { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 500; text-align: center; }
+.inventory-status.ok { background-color: #d1fae5; color: #065f46; }
+.inventory-status.low { background-color: #fef3c7; color: #92400e; }
+.inventory-status.out { background-color: #fee2e2; color: #991b1b; }
+
+/* Settings Form */
+#pharma-settings-form h4 { margin-bottom: 1rem; }
+.form-group-switch { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 28px; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--primary-color); }
+input:checked + .slider:before { transform: translateX(22px); }

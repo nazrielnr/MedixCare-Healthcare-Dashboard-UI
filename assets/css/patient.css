@@ -1,0 +1,38 @@
+/* assets/css/patient.css */
+
+/* --- TAB NAVIGATION (from before) --- */
+.tab-nav { display: flex; border-bottom: 2px solid var(--border-color); margin-bottom: 1.5rem; }
+.tab-link { padding: 0.75rem 1.5rem; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; font-weight: 500; color: var(--text-light); }
+.tab-link.active { border-color: var(--primary-color); color: var(--primary-color); }
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.5s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- APPOINTMENT CARD (from before) --- */
+.appointment-card { background: #eef2ff; border-left: 4px solid var(--primary-color); padding: 1.5rem; border-radius: 0.5rem; }
+.appointment-card p { margin-bottom: 0.25rem; }
+
+/* --- VISIT HISTORY (from before) --- */
+.visit-history-item { display: flex; gap: 1.5rem; padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+.visit-history-item:last-child { border-bottom: none; margin-bottom: 0; }
+.visit-date { font-weight: 600; color: var(--primary-color); text-align: center; }
+.visit-details h4 { font-weight: 600; margin-bottom: 0.25rem; }
+.visit-details p { font-size: 0.9rem; color: var(--text-light); }
+
+/* --- NEW STYLES FOR SPA --- */
+
+/* Document List */
+.document-list { list-style: none; }
+.document-list li { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--border-color); }
+.document-list li:last-child { border-bottom: none; }
+.document-list span { flex-grow: 1; }
+.document-list .btn { margin-left: auto; padding: 0.4rem 0.6rem; }
+
+/* Profile Form */
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+.form-input { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; font-size: 1rem; }
+
+/* Status for appointment list */
+.status-confirmed { background-color: #d1fae5; color: #065f46; }
+.status-completed { background-color: #e5e7eb; color: #4b5563; }

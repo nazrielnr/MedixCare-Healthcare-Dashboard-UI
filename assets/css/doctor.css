@@ -1,0 +1,86 @@
+/* assets/css/doctor.css */
+
+/* --- GENERAL STYLES (from before) --- */
+.search-box { position: relative; }
+.search-box i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-light); width: 18px; height: 18px; }
+.search-box input { padding: 0.5rem 0.5rem 0.5rem 2.5rem; border: 1px solid var(--border-color); border-radius: 0.5rem; width: 250px; font-size: 0.9rem; }
+.appointment-list { list-style: none; }
+.appointment-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0.5rem; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: background-color 0.2s ease; }
+.appointment-item:hover { background-color: var(--bg-color); }
+.appointment-item:last-child { border-bottom: none; }
+.appointment-item div { flex: 1; }
+.appointment-item .time { font-weight: 600; flex-basis: 15%; }
+.appointment-item .patient-name { flex-basis: 35%; }
+.appointment-item .reason { color: var(--text-light); flex-basis: 35%; }
+.appointment-item .status { flex-basis: 15%; text-align: right; }
+#patient-detail-view { padding-top: 1rem; }
+#patient-detail-view #back-to-dashboard-btn { margin-bottom: 1.5rem; }
+.patient-record-header { margin-bottom: 2rem; text-align: center; }
+.patient-record-header h2 { font-size: 1.75rem; } .patient-record-header p { color: var(--text-light); }
+.patient-record-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.patient-record-grid .full-width { grid-column: 1 / -1; }
+.visit-history-list { list-style: none; }
+.visit-history-item { display: flex; gap: 1.5rem; padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+.visit-history-item:last-child { border-bottom: none; margin-bottom: 0; }
+.visit-date { font-weight: 600; color: var(--primary-color); text-align: center; }
+.visit-details h4 { font-weight: 600; margin-bottom: 0.25rem; }
+.visit-details p { font-size: 0.9rem; color: var(--text-light); }
+
+/* --- NEW STYLES FOR INTERACTIVE VIEWS --- */
+
+/* Schedule View: Calendar */
+.calendar-header { justify-content: space-between; }
+.calendar-header h3 { margin: 0 1rem; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; text-align: center; }
+.calendar-day-name { font-weight: 600; color: var(--text-light); font-size: 0.9rem; padding: 0.5rem 0; }
+#calendar-body { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; }
+.calendar-day { padding: 0.75rem 0; border-radius: 50%; cursor: pointer; transition: background-color 0.2s; position: relative; }
+.calendar-day.other-month { color: #ccc; }
+.calendar-day:hover { background-color: var(--bg-color); }
+.calendar-day.today { background-color: var(--yellow-color); color: white; font-weight: bold; }
+.calendar-day.active { background-color: var(--primary-color); color: white; }
+.calendar-day .event-dot { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; background-color: var(--red-color); border-radius: 50%; }
+.calendar-day.today .event-dot { background-color: white; }
+.daily-appointment-item { padding: 0.75rem; border-bottom: 1px solid var(--border-color); }
+.daily-appointment-item:last-child { border-bottom: none; }
+.daily-appointment-item strong { display: block; }
+.daily-appointment-item p { font-size: 0.9rem; color: var(--text-light); }
+
+/* Patients View */
+.controls-wrapper { display: flex; gap: 1rem; align-items: center; }
+.form-select { padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background-color: white; }
+
+/* Messaging View */
+.messaging-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; height: 70vh; }
+.message-list-panel .card-body { padding: 0; overflow-y: auto; }
+.message-item { display: flex; flex-direction: column; padding: 1rem; border-bottom: 1px solid var(--border-color); cursor: pointer; }
+.message-item:hover { background-color: var(--bg-color); }
+.message-item.active { background-color: #eef2ff; border-left: 3px solid var(--primary-color); }
+.message-sender { font-weight: 600; }
+.message-subject { color: var(--text-light); font-size: 0.9rem; }
+.message-item.unread .message-sender { font-weight: 700; color: var(--text-color); }
+.message-item.unread .message-subject { color: var(--primary-color); }
+.message-content-panel { display: flex; flex-direction: column; }
+.placeholder-message { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--text-light); }
+.placeholder-message i { width: 48px; height: 48px; margin-bottom: 1rem; }
+#message-detail-container { padding: 1.5rem; border-bottom: 1px solid var(--border-color); }
+.message-detail-header { margin-bottom: 1rem; } .message-detail-header h4 { font-size: 1.2rem; } .message-detail-header p { font-size: 0.9rem; color: var(--text-light); }
+.message-detail-body { line-height: 1.7; }
+#message-reply-container { padding: 1.5rem; }
+#reply-textarea { width: 100%; min-height: 100px; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-color); resize: vertical; margin-bottom: 1rem; }
+#send-reply-btn { float: right; }
+
+/* Settings View */
+#settings-form h4 { margin-top: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
+#settings-form h4:first-child { margin-top: 0; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+.form-input { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; }
+#settings-form hr { border: 0; height: 1px; background-color: var(--border-color); margin: 2rem 0; }
+.form-group-switch { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 28px; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--primary-color); }
+input:checked + .slider:before { transform: translateX(22px); }

@@ -1,0 +1,59 @@
+/* assets/css/nurse.css */
+
+/* --- PATIENT GRID (from before) --- */
+.patient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.patient-card { background: var(--card-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); cursor: pointer; transition: box-shadow 0.2s; overflow: hidden; }
+.patient-card:hover { box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.patient-card-summary { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; }
+.patient-info h4 { font-weight: 600; }
+.patient-info p { font-size: 0.9rem; color: var(--text-light); }
+.patient-card-details { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: var(--bg-color); }
+.patient-card.expanded .patient-card-details { max-height: 500px; border-top: 1px solid var(--border-color); padding: 1rem 1.5rem; }
+.vitals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; text-align: center; }
+.vital-item p:first-child { font-weight: 600; font-size: 1.1rem; }
+.vital-item p:last-child { color: var(--text-light); font-size: 0.8rem; }
+.nurse-notes { border-top: 1px solid var(--border-color); padding-top: 1rem; font-size: 0.9rem; }
+.nurse-notes strong { display: block; margin-bottom: 0.25rem; }
+
+/* --- TASK LIST (from before) --- */
+.task-list { list-style: none; }
+.task-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
+.task-item:last-child { border-bottom: none; }
+.task-item input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; }
+.task-item label { flex-grow: 1; }
+.task-item.completed label { text-decoration: line-through; color: var(--text-light); }
+
+/* --- NEW STYLES FOR SPA --- */
+
+/* Generic form elements */
+.form-select { padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background-color: white; }
+.search-box { position: relative; }
+.search-box i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-light); width: 18px; height: 18px; }
+.search-box input { padding: 0.5rem 0.5rem 0.5rem 2.5rem; border: 1px solid var(--border-color); border-radius: 0.5rem; width: 100%; max-width: 250px; font-size: 0.9rem; }
+.card-header .form-select { margin-left: auto; }
+
+/* Notification List for Overview */
+.notification-list { list-style: none; }
+.notification-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--border-color); }
+.notification-item:last-child { border-bottom: none; }
+.notification-item .icon { flex-shrink: 0; }
+.notification-item.alert .icon i { color: var(--red-color); }
+.notification-item.info .icon i { color: var(--primary-color); }
+.notification-content p { margin: 0; }
+.notification-content .meta { font-size: 0.8rem; color: var(--text-light); }
+
+/* Settings Form */
+#nurse-settings-form h4 { margin-top: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
+#nurse-settings-form h4:first-child { margin-top: 0; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+.form-input { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; }
+.form-input:disabled { background-color: var(--bg-color); color: var(--text-light); }
+#nurse-settings-form hr { border: 0; height: 1px; background-color: var(--border-color); margin: 2rem 0; }
+.form-group-switch { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 28px; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--primary-color); }
+input:checked + .slider:before { transform: translateX(22px); }

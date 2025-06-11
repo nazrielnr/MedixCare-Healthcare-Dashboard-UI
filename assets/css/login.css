@@ -1,0 +1,104 @@
+/* assets/css/login.css */
+/* Gaya khusus untuk halaman login index.html */
+
+body {
+    /* Mencegah scroll pada layout split screen */
+    overflow: hidden; 
+}
+
+/* Struktur layout utama */
+.split-screen-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Panel kiri untuk konten login, lebarnya 3/8 dari total */
+.login-panel {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--card-bg); /* Menggunakan variabel dari global.css */
+    z-index: 10;
+}
+
+/* Panel kanan untuk gambar, lebarnya 5/8 dari total */
+.image-panel {
+    flex: 5;
+    background-color: #111; /* Latar belakang gelap jika gambar gagal */
+}
+
+/* Gaya untuk gambar statis di panel kanan */
+.showcase-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memastikan gambar memenuhi panel tanpa distorsi */
+    filter: brightness(0.9); /* Sedikit meredupkan gambar agar tidak terlalu mencolok */
+}
+
+/* Styling untuk container konten login di panel kiri */
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+.login-header {
+    margin-bottom: 2rem;
+}
+.login-header i {
+    color: var(--primary-color);
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.5rem;
+}
+.login-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.login-header p, .login-form .description {
+    color: var(--text-light);
+}
+.login-form h2 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.login-form .description {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+.role-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+.role-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.role-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0.75rem;
+}
+.login-footer {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
