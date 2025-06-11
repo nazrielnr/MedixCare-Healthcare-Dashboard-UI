@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Dokter - MedixCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ===== PATH CSS YANG BENAR ===== -->
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/doctor.css">
+</head>
+<body id="doctor-dashboard">
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i data-feather="activity"></i>
+                <h2>MedixCare</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" data-view="dashboard" class="nav-link active"><i data-feather="home"></i> <span>Dasbor</span></a>
+                <a href="#" data-view="schedule" class="nav-link"><i data-feather="calendar"></i> <span>Jadwal</span></a>
+                <a href="#" data-view="patients" class="nav-link"><i data-feather="users"></i> <span>Pasien</span></a>
+                <a href="#" data-view="messages" class="nav-link"><i data-feather="message-square"></i> <span>Pesan</span></a>
+                <a href="#" data-view="settings" class="nav-link"><i data-feather="settings"></i> <span>Pengaturan</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="nav-link"><i data-feather="log-out"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1 id="main-header-title">Dasbor</h1>
+                <div class="user-profile">
+                    <span id="doctor-name"></span>
+                    <img src="https://i.pravatar.cc/40?u=doctor" alt="Avatar">
+                </div>
+            </header>
+            
+            <!-- Dashboard View (Visible by default) -->
+            <div id="dashboard-view" class="view-container">
+                <section class="stats-grid" id="summary-stats-container"></section>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Jadwal Hari Ini</h3>
+                        <div class="search-box">
+                            <i data-feather="search"></i>
+                            <input type="text" id="patient-search-input" placeholder="Cari pasien...">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="appointment-list" id="appointment-list"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patient Detail View (Hidden by default) -->
+            <div id="patient-detail-view" class="hidden">
+                 <button id="back-to-dashboard-btn" class="btn btn-secondary"><i data-feather="arrow-left"></i> Kembali ke Dasbor</button>
+                 <div class="patient-record-header">
+                     <h2 id="detail-patient-name"></h2>
+                     <p>
+                         <span id="detail-patient-dob"></span> |
+                         Gol. Darah: <span id="detail-patient-blood"></span> |
+                         Alergi: <span id="detail-patient-allergies"></span>
+                     </p>
+                 </div>
+                 <div class="patient-record-grid">
+                     <div class="card"><div class="card-header"><h3>Riwayat Kunjungan</h3></div><div class="card-body"><ul class="visit-history-list" id="visit-history-list"></ul></div></div>
+                     <div class="card"><div class="card-header"><h3>Hasil Lab</h3></div><div class="card-body"><canvas id="lab-results-chart"></canvas></div></div>
+                     <div class="card full-width"><div class="card-header"><h3>Resep Obat</h3></div><div class="card-body"><table class="data-table" id="prescriptions-table"><thead><tr><th>Nama Obat</th><th>Dosis</th><th>Status</th></tr></thead><tbody></tbody></table></div></div>
+                 </div>
+            </div>
+
+            <!-- Schedule View -->
+            <div id="schedule-view" class="view-container hidden">
+                <div class="two-column-grid">
+                    <div class="card">
+                        <div class="card-header calendar-header">
+                            <button id="prev-month-btn" class="btn btn-secondary"><i data-feather="chevron-left"></i></button>
+                            <h3 id="calendar-month-year"></h3>
+                            <button id="next-month-btn" class="btn btn-secondary"><i data-feather="chevron-right"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="calendar-grid">
+                                <div class="calendar-day-name">Min</div><div class="calendar-day-name">Sen</div><div class="calendar-day-name">Sel</div>
+                                <div class="calendar-day-name">Rab</div><div class="calendar-day-name">Kam</div><div class="calendar-day-name">Jum</div>
+                                <div class="calendar-day-name">Sab</div>
+                                <!-- Calendar days will be populated by JS -->
+                                <div id="calendar-body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Janji Temu untuk <span id="selected-date-display"></span></h3>
+                        </div>
+                        <div class="card-body" id="daily-schedule-list">
+                            <p>Pilih tanggal dari kalender untuk melihat jadwal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patients View -->
+            <div id="patients-view" class="view-container hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Daftar Pasien</h3>
+                        <div class="controls-wrapper">
+                            <div class="search-box">
+                                <i data-feather="search"></i>
+                                <input type="text" id="all-patients-search" placeholder="Cari nama pasien...">
+                            </div>
+                            <select id="sort-patients-select" class="form-select">
+                                <option value="name_asc">Nama (A-Z)</option>
+                                <option value="name_desc">Nama (Z-A)</option>
+                                <option value="last_visit_desc">Kunjungan Terakhir</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Nama</th><th>Tgl Lahir</th><th>Kontak</th><th>Kunjungan Terakhir</th></tr>
+                            </thead>
+                            <tbody id="all-patients-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages View -->
+            <div id="messages-view" class="view-container hidden">
+                <div class="messaging-layout">
+                    <div class="card message-list-panel">
+                        <div class="card-header"><h3>Kotak Masuk</h3></div>
+                        <div class="card-body" id="message-list-container">
+                            <!-- Messages will be populated by JS -->
+                        </div>
+                    </div>
+                    <div class="card message-content-panel">
+                        <div id="message-detail-container">
+                           <div class="placeholder-message">
+                                <i data-feather="message-square"></i>
+                                <p>Pilih pesan untuk dibaca</p>
+                           </div>
+                        </div>
+                        <div id="message-reply-container" class="hidden">
+                           <textarea id="reply-textarea" placeholder="Tulis balasan Anda di sini..."></textarea>
+                           <button id="send-reply-btn" class="btn btn-primary">Kirim Balasan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settings-view" class="view-container hidden">
+                <div class="card">
+                    <div class="card-header"><h3>Pengaturan Profil & Notifikasi</h3></div>
+                    <div class="card-body">
+                        <form id="settings-form">
+                            <h4>Informasi Profil</h4>
+                            <div class="form-group">
+                                <label for="setting-name">Nama Lengkap</label>
+                                <input type="text" id="setting-name" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="setting-specialty">Spesialisasi</label>
+                                <input type="text" id="setting-specialty" class="form-input" required>
+                            </div>
+                            <hr>
+                            <h4>Notifikasi</h4>
+                            <div class="form-group-switch">
+                                <label for="setting-notif-new-appt">Janji temu baru</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-notif-new-appt">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                             <div class="form-group-switch">
+                                <label for="setting-notif-lab-result">Hasil lab masuk</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-notif-lab-result">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal for Appointment Details -->
+    <div id="appointment-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><h3>Detail Janji Temu</h3><p><strong>Pasien:</strong> <span id="modal-patient-name"></span></p><p><strong>Keluhan:</strong> <span id="modal-visit-reason"></span></p><button id="view-full-record-btn" class="btn btn-primary">Lihat Rekam Medis Lengkap</button></div></div>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

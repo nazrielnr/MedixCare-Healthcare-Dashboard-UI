@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MedixCare</title>
+    
+    <!-- CSS: global.css untuk variabel & dasar, login.css untuk layout halaman ini -->
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+
+    <!-- Font & Ikon -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+
+    <div class="split-screen-container">
+        <!-- Panel Kiri: Konten Login (3/8 Lebar) -->
+        <div class="login-panel">
+            <div class="login-container">
+                <div class="login-header">
+                    <i data-feather="activity"></i>
+                    <h1>MedixCare</h1>
+                    <p>Sistem Manajemen Rumah Sakit</p>
+                </div>
+                <div class="login-form">
+                    <h2>Pilih Dasbor Anda</h2>
+                    <p class="description">Pilih peran Anda untuk melanjutkan ke dasbor.</p>
+                    <div class="role-selection">
+                        <a href="doctor.html" class="role-card">
+                            <i data-feather="shield" class="role-icon"></i>
+                            <span>Dokter</span>
+                        </a>
+                        <a href="nurse.html" class="role-card">
+                            <i data-feather="user" class="role-icon"></i>
+                            <span>Perawat</span>
+                        </a>
+                        <a href="admin.html" class="role-card">
+                            <i data-feather="briefcase" class="role-icon"></i>
+                            <span>Admin</span>
+                        </a>
+                        <a href="pharmacist.html" class="role-card">
+                            <i data-feather="package" class="role-icon"></i>
+                            <span>Apoteker</span>
+                        </a>
+                        <a href="patient.html" class="role-card">
+                            <i data-feather="heart" class="role-icon"></i>
+                            <span>Pasien</span>
+                        </a>
+                        <a href="#" class="role-card" style="opacity: 0.4; cursor: not-allowed; background-color: #f9fafb;">
+                            <i data-feather="thermometer" class="role-icon"></i>
+                            <span>Laboran</span>
+                        </a>
+                    </div>
+                </div>
+                <footer class="login-footer">
+                     © 2024 MedixCare. All rights reserved.
+                </footer>
+            </div>
+        </div>
+
+        <!-- Panel Kanan: Gambar Default (5/8 Lebar) -->
+        <div class="image-panel">
+            <img class="showcase-image" src="https://images.pexels.com/photos/534219/pexels-photo-534219.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="MedixCare Hospital">
+        </div>
+    </div>
+
+    <!-- JavaScript hanya untuk render ikon, tidak ada lagi logika transisi -->
+    <script>
+        feather.replace();
+    </script>
+
+</body>
+</html>

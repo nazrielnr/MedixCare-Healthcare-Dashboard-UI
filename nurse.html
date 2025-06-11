@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Perawat - MedixCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/nurse.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body id="nurse-dashboard">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><i data-feather="activity"></i><h2>MedixCare</h2></div>
+            <nav class="sidebar-nav">
+                <!-- REVISI: Menggunakan data-view untuk navigasi SPA -->
+                <a href="#" data-view="overview" class="nav-link active"><i data-feather="layout"></i><span>Tinjauan</span></a>
+                <a href="#" data-view="patients" class="nav-link"><i data-feather="users"></i><span>Pasien Saya</span></a>
+                <a href="#" data-view="tasks" class="nav-link"><i data-feather="check-square"></i><span>Tugas</span></a>
+                <a href="#" data-view="settings" class="nav-link"><i data-feather="settings"></i><span>Pengaturan</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="index.html" class="nav-link"><i data-feather="log-out"></i> <span>Logout</span></a></div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <!-- REVISI: Menambahkan ID untuk judul dinamis -->
+                <h1 id="main-header-title">Tinjauan</h1>
+                <div class="user-profile"><span id="nurse-name"></span><img src="https://i.pravatar.cc/40?u=nurse" alt="Avatar"></div>
+            </header>
+
+            <!-- REVISI: Membungkus setiap "halaman" dalam view-container -->
+
+            <!-- Overview View (Default) -->
+            <div id="overview-view" class="view-container">
+                <div class="stats-grid" id="nurse-stats-container">
+                    <!-- Stat cards for nurse will be populated by JS -->
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Pemberitahuan & Peringatan Penting</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="notification-list" id="nurse-notifications-list">
+                            <!-- Important alerts will be populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assigned Patients View -->
+            <div id="patients-view" class="view-container hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Pasien yang Ditugaskan</h3>
+                        <div class="search-box">
+                            <i data-feather="search"></i>
+                            <input type="text" id="nurse-patient-search" placeholder="Cari nama pasien...">
+                        </div>
+                    </div>
+                    <div class="card-body" id="patient-grid">
+                        <!-- Patient cards will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task List View -->
+            <div id="tasks-view" class="view-container hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Daftar Lengkap Tugas</h3>
+                        <select id="task-filter-select" class="form-select">
+                            <option value="all">Semua Tugas</option>
+                            <option value="pending">Tertunda</option>
+                            <option value="completed">Selesai</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <ul class="task-list" id="task-list">
+                            <!-- Tasks will be populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settings-view" class="view-container hidden">
+                 <div class="card">
+                    <div class="card-header"><h3>Pengaturan Akun Perawat</h3></div>
+                    <div class="card-body">
+                        <form id="nurse-settings-form">
+                            <h4>Informasi Dasar</h4>
+                            <div class="form-group">
+                                <label for="nurse-setting-name">Nama Lengkap</label>
+                                <input type="text" id="nurse-setting-name" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nurse-setting-id">ID Perawat</label>
+                                <input type="text" id="nurse-setting-id" class="form-input" value="N-734" disabled>
+                            </div>
+                            <hr>
+                            <h4>Preferensi Notifikasi</h4>
+                            <div class="form-group-switch">
+                                <label for="nurse-notif-new-task">Tugas baru ditugaskan</label>
+                                <label class="switch"><input type="checkbox" id="nurse-notif-new-task" checked><span class="slider"></span></label>
+                            </div>
+                             <div class="form-group-switch">
+                                <label for="nurse-notif-vital-alert">Peringatan tanda vital pasien kritis</label>
+                                <label class="switch"><input type="checkbox" id="nurse-notif-vital-alert" checked><span class="slider"></span></label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

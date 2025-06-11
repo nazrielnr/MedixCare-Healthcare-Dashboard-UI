@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Admin - MedixCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body id="admin-dashboard">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><i data-feather="activity"></i><h2>MedixCare</h2></div>
+            <nav class="sidebar-nav">
+                <!-- REVISI: Menggunakan data-view untuk navigasi SPA -->
+                <a href="#" data-view="dashboard" class="nav-link active"><i data-feather="home"></i><span>Dasbor</span></a>
+                <a href="#" data-view="patients" class="nav-link"><i data-feather="users"></i><span>Manajemen Pasien</span></a>
+                <a href="#" data-view="billing" class="nav-link"><i data-feather="dollar-sign"></i><span>Penagihan</span></a>
+                <a href="#" data-view="reports" class="nav-link"><i data-feather="bar-chart-2"></i><span>Laporan</span></a>
+                <a href="#" data-view="settings" class="nav-link"><i data-feather="settings"></i><span>Pengaturan</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="index.html" class="nav-link"><i data-feather="log-out"></i> <span>Logout</span></a></div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <!-- REVISI: Menambahkan ID untuk judul dinamis -->
+                <h1 id="main-header-title">Dasbor</h1>
+                <div class="user-profile"><span id="admin-name"></span><img src="https://i.pravatar.cc/40?u=admin" alt="Avatar"></div>
+            </header>
+
+            <!-- REVISI: Konten dibungkus dalam view-container -->
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view-container">
+                <section class="stats-grid" id="kpi-stats-container"></section>
+                <button class="btn btn-primary" id="btn-register-patient" style="margin-bottom: 1.5rem;"><i data-feather="user-plus"></i> Daftarkan Pasien Baru</button>
+                <div class="two-column-grid">
+                    <div class="card"><div class="card-header"><h3>Kunjungan Pasien (Minggu Ini)</h3></div><div class="card-body"><canvas id="patient-visit-chart"></canvas></div></div>
+                    <div class="card"><div class="card-header"><h3>Status Penagihan</h3></div><div class="card-body" style="height: 300px; display:flex; justify-content:center; align-items:center;"><canvas id="billing-status-chart"></canvas></div></div>
+                </div>
+            </div>
+
+            <!-- Patient Management View -->
+            <div id="patients-view" class="view-container hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Manajemen Data Pasien</h3>
+                        <div class="controls-wrapper">
+                            <div class="search-box">
+                                <i data-feather="search"></i>
+                                <input type="text" id="admin-patient-search" placeholder="Cari nama atau ID pasien...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead><tr><th>ID Pasien</th><th>Nama</th><th>Tgl Registrasi</th><th>Status Asuransi</th><th>Aksi</th></tr></thead>
+                            <tbody id="admin-patient-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing View -->
+            <div id="billing-view" class="view-container hidden">
+                <div class="card">
+                     <div class="card-header">
+                        <h3>Manajemen Penagihan</h3>
+                        <div class="controls-wrapper">
+                            <div class="search-box">
+                                <i data-feather="search"></i>
+                                <input type="text" id="admin-billing-search" placeholder="Cari nama atau ID tagihan...">
+                            </div>
+                             <select id="billing-filter-select" class="form-select">
+                                <option value="all">Semua Status</option>
+                                <option value="Belum Dibayar">Belum Dibayar</option>
+                                <option value="Lunas">Lunas</option>
+                                <option value="Klaim Asuransi">Klaim Asuransi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead><tr><th>ID Tagihan</th><th>Nama Pasien</th><th>Tgl Tagihan</th><th>Jumlah</th><th>Status</th><th>Aksi</th></tr></thead>
+                            <tbody id="admin-billing-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports View -->
+            <div id="reports-view" class="view-container hidden">
+                <div class="two-column-grid">
+                    <div class="card">
+                        <div class="card-header"><h3>Laporan Pendapatan Bulanan</h3></div>
+                        <div class="card-body"><canvas id="monthly-revenue-chart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>Laporan Layanan Terpopuler</h3></div>
+                        <div class="card-body" style="height: 350px; display:flex; justify-content:center; align-items:center;"><canvas id="service-popularity-chart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settings-view" class="view-container hidden">
+                <div class="card">
+                    <div class="card-header"><h3>Pengaturan Sistem</h3></div>
+                    <div class="card-body">
+                        <form id="admin-settings-form">
+                            <h4>Informasi Rumah Sakit</h4>
+                            <div class="form-group">
+                                <label for="hospital-name">Nama Rumah Sakit</label>
+                                <input type="text" id="hospital-name" class="form-input" value="MedixCare Hospital">
+                            </div>
+                            <hr>
+                            <h4>Pengaturan Umum</h4>
+                             <div class="form-group-switch">
+                                <label for="maintenance-mode">Aktifkan Mode Perawatan</label>
+                                <label class="switch"><input type="checkbox" id="maintenance-mode"><span class="slider"></span></label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registration-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><h3>Form Pendaftaran Pasien Baru</h3><form><div class="form-group"><label for="reg-name">Nama Lengkap</label><input type="text" id="reg-name" placeholder="Masukkan nama pasien"></div><div class="form-group"><label for="reg-dob">Tanggal Lahir</label><input type="date" id="reg-dob"></div><div class="form-group"><label for="reg-address">Alamat</label><input type="text" id="reg-address" placeholder="Masukkan alamat"></div><button type="button" class="btn btn-primary" onclick="alert('Simulasi: Pasien terdaftar!')">Daftarkan</button></form></div></div>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
